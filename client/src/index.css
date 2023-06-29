@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+
+/* font-roboto, lato, montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@500;600&family=Roboto:wght@300;400;500&display=swap');
