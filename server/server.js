@@ -1,62 +1,71 @@
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require('nodemailer');
-const {google} = require('googleapis');
+const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-require('dotenv').config();
+const router = require('./router.js');
+
+const ipoData = require('./formatData');
+
+require("dotenv").config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/message', router);
 
-app.get("/message", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
 
 //sending email through gmail api.
 
-const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
-oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN })
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET
+);
+oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 
-async function sendMail() {
+async function sendMail(mailOptions) {
   try {
     const accessToken = await oAuth2Client.getAccessToken();
-    
+
     const transport = nodemailer.createTransport({
-      service: 'gmail', 
+      service: "gmail",
       auth: {
-        type: 'OAuth2', 
-        user: 'lalityadav.x17@gmail.com', 
-        clientId: process.env.CLIENT_ID, 
-        clientSecret: process.env.CLIENT_SECRET, 
-        refreshToken: process.env.REFRESH_TOKEN, 
+        type: "OAuth2",
+        user: "lalityadav.x17@gmail.com",
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN,
         accessToken: accessToken,
-      }
-    }); 
-    
-    const mailOptions = {
-      from: '"IPO Notifier" <ipo@lalityadav.com.np>', 
-      to: 'lalityadav.ver2@gmail.com', 
-      subject: 'Hello from the other side', 
-      text: 'we did it.',
-    };
-    
+      },
+    });
+
     const result = await transport.sendMail(mailOptions);
     return result;
-
-
   } catch (error) {
     return error;
   }
 }
 
-sendMail()
-.then((result) => console.log("Email Sending...", result))
-.catch((error) => {console.log(error.message)});
+const customMail = ( receiver, subject, body, code, sender = '"IPO Notifier" <ipo@lalityadav.com.np>', ) => {
+  mailOptions =  {
+    from: sender,
+    to: receiver,
+    subject: subject,
+    text: body,
+    html: code
+  };
+
+  sendMail(mailOptions)
+  .then((result) => console.log("Email Sending...", result))
+  .catch((error) => {
+    console.log(error.message);
+  });
+
+};
 
 
 
@@ -72,27 +81,37 @@ app.post("/api/submit-form", (req, res) => {
         email: formData.EMAIL,
       },
     });
-    console.log(user);
+    customMail(formData.EMAIL, "You are subscribed to IPO notifier", "Welcome", '<h1>Welcome</h1>');
   }
   createUser()
-  .then((data) => {
-    res.send('yes');
-  })
+    .then((data) => {
+      res.send("yes");
+    })
     .catch((e) => {
       console.error(e.message);
-      res.send('no');
+      res.send("no");
     })
     .finally(async () => {
       await prisma.$disconnect();
     });
-
-  
 });
 
 
+async function formattedData() {
+  try {
+    const openIpox = await ipoData();
+
+    console.log(openIpox);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+formattedData();
 
 
-//database operations
+
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
