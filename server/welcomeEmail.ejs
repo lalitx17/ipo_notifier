@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Email</title>
+  <style>
+    /* Your CSS styles go here */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="<%= logoUrl %>" alt="Your Company Logo">
+    </div>
+    <div class="content">
+      <h1>Welcome to Our Newsletter!</h1>
+      <p>Dear <%= customerName %>,</p>
+      <p>Thank you for subscribing to our newsletter. We're excited to have you on board!</p>
+      <p>Stay tuned for the latest updates, promotions, and exclusive offers.</p>
+      <a class="cta-button" href="<%= ctaUrl %>">Get Started</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+const fs = require('fs');
+const ejs = require('ejs');
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -16,6 +18,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/message', router);
+app.set("view engine", "ejs");
 
 
 //sending email through gmail api.
@@ -50,8 +53,8 @@ async function sendMail(mailOptions) {
   }
 }
 
-const customMail = ( receiver, subject, body, code, sender = '"IPO Notifier" <ipo@lalityadav.com.np>', ) => {
-  mailOptions =  {
+const customMail = (receiver, subject, body, code, sender = '"IPO Notifier" <ipo@lalityadav.com.np>',) => {
+  mailOptions = {
     from: sender,
     to: receiver,
     subject: subject,
@@ -60,10 +63,10 @@ const customMail = ( receiver, subject, body, code, sender = '"IPO Notifier" <ip
   };
 
   sendMail(mailOptions)
-  .then((result) => console.log("Email Sending...", result))
-  .catch((error) => {
-    console.log(error.message);
-  });
+    .then((result) => console.log("Email Sending...", result))
+    .catch((error) => {
+      console.log(error.message);
+    });
 
 };
 
@@ -81,7 +84,21 @@ app.post("/api/submit-form", (req, res) => {
         email: formData.EMAIL,
       },
     });
-    customMail(formData.EMAIL, "You are subscribed to IPO notifier", "Welcome", '<h1>Welcome</h1>');
+
+    fs.readFile('./welcomeEmail.ejs', 'utf8', (error, template) => {
+      if (error) {
+        console.log('Error occurred while reading HTML template file:', error);
+        return;
+      }
+
+      // Call the email sending function with the template content
+      const renderedHtml = ejs.render(template, { logoUrl: 'https://example.com/logo.png', customerName: formData.FNAME, ctaUrl: 'https://example.com' });
+
+
+      customMail(formData.EMAIL, "You are subscribed to IPO notifier", "Welcome", renderedHtml);
+    });
+
+
   }
   createUser()
     .then((data) => {
@@ -108,7 +125,60 @@ async function formattedData() {
   }
 }
 
-formattedData();
+/* formattedData(); */
+let previousDay = 0;
+
+
+
+function sendEmailOnSpecificTime(targetDay, targetTime, getEmails){
+  const currentDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' });
+  const currentDay = new Date(currentDate).getDay();
+  const currentHour = new Date(currentDate).getHours();
+  const currentMinute = new Date(currentDate).getMinutes();
+  
+
+
+  if (targetDay.includes(currentDay)){
+    if (currentHour === targetTime[0] && currentMinute === targetTime[1]){
+      if (currentDay !== previousDay){
+        console.log(currentDay, currentHour, currentMinute);
+        
+
+        getEmails()
+        .then((emails) => {
+             console.log(emails);
+        })
+        .catch((error) =>{
+          console.log(error);
+        });
+
+        previousDay = currentDay;
+      }
+      
+    }
+  }
+}
+
+
+const targetDay = [3, 6];
+const targetTime = [12, 39];
+
+async function getEmails(){
+  const emails = await prisma.user.findMany({
+    select:{
+      email: true
+    }
+  });
+  return emails;
+}
+
+
+setInterval(() => {
+  sendEmailOnSpecificTime(targetDay, targetTime, getEmails);
+}, 5000); 
+
+
+
 
 
 
