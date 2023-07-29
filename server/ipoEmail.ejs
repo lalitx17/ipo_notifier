@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upcoming IPOs Newsletter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f6f6f6;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f6f6f6;
+        box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1),
+          -8px -8px 16px rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+      }
+
+      h1 {
+        color: #006400;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: #f6f6f6;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1),
+          -8px -8px 16px rgba(255, 255, 255, 0.5);
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+        background-color: #f6f6f6;
+      }
+
+      th::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: calc(100% + 2px);
+        height: calc(100% + 2px);
+        background-color: #006400;
+        transform: translateZ(-1px);
+        z-index: -1;
+      }
+
+      tr:nth-child(even) td {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover td {
+        transform: translateY(-2px);
+        box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2),
+          -8px -8px 16px rgba(255, 255, 255, 0.7);
+      }
+
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #006400;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 10px;
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .button:hover {
+        transform: translate(0px, -2px);
+        box-shadow: 6px 8px 14px rgba(0, 0, 0, 0.2);
+      }
+
+      .button-Image {
+        vertical-align: bottom;
+      }
+
+      /* Mobile Styles */
+      @media only screen and (max-width: 600px) {
+        .container {
+          padding: 10px;
+          max-width: 100%;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="color: black !important">
+      <div class="logo">
+        <img
+          src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688231664/IPO%20Notifier/ipoNotifier_gx7cfo.jpg?_s=public-apps"
+          alt="IPONotifier"
+          width="300px"
+        />
+      </div>
+
+      <h2>Recent IPOs</h2>
+      <table>
+        <tr>
+          <th>Company</th>
+          <th>Units</th>
+          <th>Opening Date</th>
+          <th>Closing Date</th>
+          <th>Issue Manager</th>
+        </tr>
+
+        <% for (let i = 0; i < activeIpos.openIpos.length; i++) { %>
+        <tr>
+          <% for (let j = 0; j < 5; j++) { %>
+
+          <td><%= activeIpos.openIpos[0][j] %></td>
+
+          <% } %>
+        </tr>
+        <% } %>
+      </table>
+
+      <h2>Upcoming IPOs</h2>
+      <table>
+        <tr>
+          <th>Company</th>
+          <th>Units</th>
+          <th>Opening Date</th>
+          <th>Closing Date</th>
+          <th>Issue Manager</th>
+        </tr>
+
+        <% for (let i = 0; i < activeIpos.upcomingIpos.length; i++) { %>
+        <tr>
+          <% for (let j = 0; j < 5; j++) { %>
+
+          <td><%= activeIpos.upcomingIpos[0][j] %></td>
+
+          <% } %>
+        </tr>
+        <% } %>
+      </table>
+
+      <div style="text-align: center; margin-top: 60px">
+        If you have any questions, suggestions, or feedback, we'd love to hear
+        from you. Your input is valuable to us!
+      </div>
+
+      <div style="display: flex; justify-content: center">
+        <a href="https://www.lalityadav.com.np" class="button"
+          >&nbsp;&nbsp;&nbsp;
+          <img
+            class="button-Image"
+            src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688271707/IPO%20Notifier/flogoL_lt9e6x.jpg?_s=public-apps"
+            width="100px"
+            alt="Logo"
+          />
+          &nbsp;&nbsp;&nbsp;
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,33 +1,40 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import Sub from './Sub';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function Home() {
   const [formData, setFormData] = useState({});
 
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
     setFormData({
-      ...formData, 
+      ...formData,
       [event.target.name]: event.target.value,
     })
     console.log(formData);
-  }; 
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:8000/api/submit-form', formData)
-    .then((response) =>{
-      if (response.data === 'yes'){
-        confirm();
-      }
-    })
-    .catch((error) =>{
-      console.log(error);
-    })
+      .then((response) => {
+        if (response.data === 'yes') {
+          navigate('sub', { state: { title: 'Yay! You’re now subscribed to IPO Notifier 🎉', subHeading: 'Get ready for the latest IPO updates delivered straight to your inbox 📬' } });
+        } else {
+          navigate('sub', { state: { title: 'Uh-oh! Something went wrong 😞', subHeading: 'Please try again or contact us for assistance.' } });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
+
+
+
 
 
   return (
@@ -104,6 +111,7 @@ function Home() {
                     placeholder="Enter your first name"
                     name="FNAME"
                     onChange={handleChange}
+                    required
                   />
                 </div>
 
@@ -118,6 +126,7 @@ function Home() {
                     placeholder="Enter your last name"
                     name="LNAME"
                     onChange={handleChange}
+                    required
                   />
                 </div>
 
@@ -132,20 +141,20 @@ function Home() {
                     placeholder="Enter your email address"
                     name="EMAIL"
                     onChange={handleChange}
+                    required
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
-            
-                 <button
+
+                  <button
                     className="bg-secondary hover:bg-[#FFCF1A] mt-6 rounded-lg mx-auto w-full text-black font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
                     Join In
                   </button>
-               
-                  
                 </div>
+
               </form>
             </div>
           </div>
@@ -217,18 +226,21 @@ function Home() {
           <span className="block text-center text-sm text-gray-500 dark:text-gray-400">
             © 2023 IPO Notifer™ . All Rights Reserved.
           </span>
+          <div >
+            <a href="https://www.lalityadav.com.np">
+              <img
+                className='mx-auto mt-5'
+                src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1690617822/IPO%20Notifier/flogoB_lt9e6x_hf01yg.jpg?_s=public-apps"
+                width="150px"
+                alt="Logo"
+              />
+            </a>
+          </div>
         </div>
       </footer>
     </>
   );
 }
 
-function confirm(){
-    return(
-        <>
-            <redirect to='/sub' />
-        </>
-    )
-}
 
 export default Home;

@@ -1,7 +1,5 @@
-const fetchData = require('./ipo.js');
 
-
-async function ipoData() {
+const ipoData = async (fetchData) => {
     
   try {
     const data = await fetchData();
@@ -17,10 +15,12 @@ async function ipoData() {
             }
         }
     }
-    
+    let activeIpos = {};
+    activeIpos['openIpos'] = openIpos;
+    activeIpos['upcomingIpos'] = upcomingIpos;
 
     console.log(data[1][5]);
-    return openIpos;
+    return activeIpos;
 
   } catch (error) {
     console.error(error);
