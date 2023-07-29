@@ -41,7 +41,6 @@ async function getEmails() {
 
 
 setInterval(() => {
-  console.log(previousDay);
   IpoEmail = sendEmailOnSpecificTime(targetDay, targetTime, getEmails, ipoData, fetchData, previousDay);
   if (typeof IpoEmail === 'number'){
     previousDay = IpoEmail;
@@ -50,5 +49,4 @@ setInterval(() => {
 
 
 app.listen(8000, () => {
-  console.log(`Server is running on port 8000.`);
 });
