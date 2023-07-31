@@ -19,7 +19,6 @@ const ipoData = async (fetchData) => {
     activeIpos['openIpos'] = openIpos;
     activeIpos['upcomingIpos'] = upcomingIpos;
 
-    console.log(data[1][5]);
     return activeIpos;
 
   } catch (error) {

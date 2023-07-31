@@ -47,7 +47,7 @@ const customMail = (receiver, subject, body, code, sender = '"IPO Notifier" <ipo
   };
 
   sendMail(mailOptions)
-    .then((result) => console.log("Email Sending...", result))
+    .then((result) => {console.log("Email Sending...", result)})
     .catch((error) => {
       console.log(error.message);
     });

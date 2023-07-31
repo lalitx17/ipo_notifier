@@ -26,8 +26,8 @@ app.set("view engine", "ejs");
 let previousDay = 7;
 let IpoEmail;
 
-const targetDay = [4, 0];
-const targetTime = [16, 52];
+const targetDay = [4, 1];
+const targetTime = [20, 32];
 
 async function getEmails() {
   const emails = await prisma.user.findMany({
