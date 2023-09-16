@@ -27,7 +27,7 @@ let previousDay = 7;
 let IpoEmail;
 
 const targetDay = [4, 1];
-const targetTime = [20, 32];
+const targetTime = [7, 10];
 
 async function getEmails() {
   const emails = await prisma.user.findMany({

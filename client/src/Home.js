@@ -44,7 +44,7 @@ function Home() {
         <div className="flex items-center justify-between">
           <div className="md:ml-[12em]">
             <img
-              src="images/logo_ipo.png"
+              src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/logo_ipo_rnjekp.jpg?_s=public-apps"
               width="300em"
               height="10em"
               alt="logo"
@@ -77,7 +77,7 @@ function Home() {
 
           <div className="md:w-1/2">
             <img
-              src="images/growth_ipo.png"
+              src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/growth_ipo_lq9zm5.jpg?_s=public-apps"
               width="500em"
               height="1500em"
               alt="illustration"
@@ -174,21 +174,21 @@ function Home() {
             </h1>
 
             <div className="flex flex-row space-x-5">
-              <img src="images/tick.svg" width={30} height={30} alt="tick" />
+              <img src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/tick_ebzqxs.jpg?_s=public-apps" width={33} height={30} alt="tick" />
               <p className="max-w-sm text-2xl text-center font-primary font-[500] md:text-left">
                 Notification of the latest IPO.
               </p>
             </div>
 
             <div className="flex flex-row space-x-5">
-              <img src="images/tick.svg" width={30} height={30} alt="tick" />
+              <img src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/tick_ebzqxs.jpg?_s=public-apps" width={33} height={30} className="h-fit inline-block align-middle" alt="tick" />
               <p className="max-w-sm  text-2xl text-center font-primary font-[500] md:text-left">
                 Regular emails in the interval of three days.
               </p>
             </div>
 
             <div className="flex flex-row space-x-5">
-              <img src="images/cross.svg" width={33} height={33} alt="cross" />
+              <img src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/cross_r2mf8t.jpg?_s=public-apps" width={33} height={33} alt="cross" />
               <p className="max-w-sm text-2xl text-center font-primary font-[500] md:text-left">
                 Good Luck for IPO allotment.
               </p>
@@ -197,7 +197,7 @@ function Home() {
 
           <div className="md:w-1/2">
             <img
-              src="images/ipoStocks.png"
+              src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/ipoStocks_ujylod.jpg?_s=public-apps"
               width="500em"
               height="1500em"
               alt="IPO stocks"
@@ -216,7 +216,7 @@ function Home() {
               className="flex items-center justify-center md:justify-start mb-4 sm:mb-0"
             >
               <img
-                src="images/logo_ipo.png"
+                src="https://res.cloudinary.com/ddskth9s2/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1694895028/logo_ipo_rnjekp.jpg?_s=public-apps"
                 className="md:ml-[12em] h-6 md:h-8 mr-3"
                 alt="Logo"
               />
