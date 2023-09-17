@@ -1,5 +1,6 @@
 {
-  "name": "https://iponotifier.netlify.app/client",
+  "homepage": "https://iponotifier.netlify.app/client",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
