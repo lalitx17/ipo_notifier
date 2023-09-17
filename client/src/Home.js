@@ -20,7 +20,7 @@ function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8000/api/submit-form', formData)
+    axios.post('https://ipo-notifier-backend-qgij.onrender.com', formData)
       .then((response) => {
         if (response.data === 'yes') {
           navigate('sub', { state: { title: 'Yay! You’re now subscribed to IPO Notifier 🎉', subHeading: 'Get ready for the latest IPO updates delivered straight to your inbox 📬' } });
