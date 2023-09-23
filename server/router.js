@@ -54,7 +54,9 @@ router.post("/api/submit-form", (req, res) => {
     });
 });
 
-
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+})
 
 
 module.exports = router;

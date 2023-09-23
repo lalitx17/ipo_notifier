@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/7df51ab5-1910-4673-a1f9-598d9e0ff206/resourceGroups/AppServiceQS-rg/providers/Microsoft.Web/sites/iponotifier-backend",
+    "appService.deploySubpath": "server"
+}
