@@ -14,9 +14,14 @@ const router = require('./router.js');
 const ipoData = require('./formatData.js');
 const fetchData = require('./ipoInfo.js');
 
+const corsOptions = {
+  origin: 'https://kind-water-078a5ea0f.3.azurestaticapps.net',
+  credentials: true // Allow cookies
+};
+
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/', router);
 app.set("view engine", "ejs");
