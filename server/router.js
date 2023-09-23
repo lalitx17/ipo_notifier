@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 //accepting data form the client
 
 
-router.post("/api/submit-form", (req, res) => {
+router.post("/api/submit-form", cors(), (req, res) => {
   const formData = req.body;
   async function createUser() {
     const user = await prisma.user.create({
